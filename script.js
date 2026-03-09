@@ -3,7 +3,7 @@
 let currentUser = null;
 
 // Your backend server's URL. Make sure the port is correct.
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '';
 
 // A wrapper function to contain all app initialization logic
 window.onload = function() {
@@ -100,22 +100,15 @@ window.onload = function() {
     // --- API Functions ---
 
     // 1. Handle User Registration
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = el('regEmail').value;
-        const fullName = el('regFullName').value;
-        const username = el('regUsername').value;
-        const password = el('regPassword').value;
+ registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showResponse(registerResponse, 'Account created! (Demo Mode)', 'green');
+    registerForm.reset();
 
-        showResponse(registerResponse, 'Registering...', 'var(--text-light)');
-
-        try {
-            const res = await fetch(`${API_URL}/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
-            });
-
+    setTimeout(() => {
+        showPage(loginPage);
+    }, 1000);
+});
             const data = await res.json();
 
             if (res.status === 201) {
@@ -131,19 +124,21 @@ window.onload = function() {
     });
 
     // 2. Handle User Login
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const usernameOrEmail = el('loginUsername').value;
-        const password = el('loginPassword').value;
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-        showResponse(loginResponse, 'Logging in...', 'var(--text-light)');
+    const username = el('loginUsername').value;
 
-        try {
-            const res = await fetch(`${API_URL}/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ usernameOrEmail, password })
-            });
+    currentUser = { username: username };
+
+    welcomeMessage.textContent = `Welcome, ${username}!`;
+
+    loginForm.reset();
+
+    setTimeout(() => {
+        showPage(dashboardPage);
+    }, 500);
+});
 
             const data = await res.json();
 
@@ -169,25 +164,12 @@ window.onload = function() {
     });
 
     // 3. Handle Getting a Mission
-    getMissionBtn.addEventListener('click', async () => {
-        missionDisplay.innerHTML = '<p>Fetching mission...</p>';
-        
-        try {
-            const res = await fetch(`${API_URL}/get-mission`);
-            const data = await res.json();
-
-            if (res.status === 200) {
-                missionDisplay.innerHTML = `
-                    <h4>${data.title}</h4>
-                    <p>${data.details}</p>
-                `;
-            } else {
-                throw new Error(data.message);
-            }
-        } catch (err) {
-            missionDisplay.innerHTML = `<p style="color: var(--danger-color);">Error: ${err.message}</p>`;
-        }
-    });
+    getMissionBtn.addEventListener('click', () => {
+    missionDisplay.innerHTML = `
+        <h4>Daily Mission</h4>
+        <p>Write one paragraph about something you learned today.</p>
+    `;
+});
 
     // 4. Handle Creating a Blog Post
     createPostForm.addEventListener('submit', async (e) => {
