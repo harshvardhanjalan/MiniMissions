@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimissions</title>
+    <!-- Import Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. LOGIN PAGE (Default) -->
+    <div id="loginPage" class="page-container">
+        <div class="auth-card">
+            <h1 class="logo">Minimissions</h1>
+            <p class="subtitle">Your one stop to daily fun.</p>
+            <form id="loginForm">
+                <input type="text" id="loginUsername" placeholder="Username or Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+            <div id="loginResponse" class="response-message"></div>
+            <div class="auth-switch">
+                <p>Don't have an account? <a href="#" id="navToRegister">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. REGISTER PAGE  -->
+    <div id="registerPage" class="page-container" style="display: none;">
+        <div class="auth-card">
+            <h1 class="logo">Minimissions</h1>
+            <p class="subtitle">Sign up to get your daily missions.</p>
+            <form id="registerForm">
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="text" id="regFullName" placeholder="Full Name" required>
+                <input type="text" id="regUsername" placeholder="Username" required>
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <div id="registerResponse" class="response-message"></div>
+            <div class="auth-switch">
+                <p>Have an account? <a href="#" id="navToLogin">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DASHBOARD PAGE (Hidden) -->
+    <div id="dashboardPage" class="page-container" style="display: none;">
+        <nav class="navbar">
+            <h1 class="logo-nav">Minimissions</h1>
+            <div>
+                <button id="navToFeed" class="btn btn-secondary">Go to Feed</button>
+                <button id="logoutButton" class="btn btn-danger">Log Out</button>
+            </div>
+        </nav>
+        
+        <div class="dashboard-content">
+            <div class="card mission-card">
+                <h2 id="welcomeMessage">Welcome!</h2>
+                <p>Ready for your next challenge? Click the button below.</p>
+                <button id="getMissionBtn" class="btn btn-success">Get New Mission</button>
+                <div id="missionDisplay" class="mission-display-box">
+                    <!-- Mission content will be injected here by JS -->
+                </div>
+            </div>
+
+            <div class="card post-card">
+                <h2>Create a Post</h2>
+                <p>Share your experience with your last mission!</p>
+                <form id="createPostForm">
+                    <input type="text" id="postTitle" placeholder="Post Title" required>
+                    <textarea id="postContent" rows="5" placeholder="Share your story..." required></textarea>
+                    <button type="submit" class="btn btn-primary">Post to Feed</button>
+                </form>
+                <div id="postResponse" class="response-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. FEED PAGE (Hidden) -->
+    <div id="feedPage" class="page-container" style="display: none;">
+        <nav class="navbar">
+            <h1 class="logo-nav">Minimissions Feed</h1>
+            <div>
+                <button id="navToDashboardFromFeed" class="btn btn-secondary">Back to Dashboard</button>
+            </div>
+        </nav>
+
+        <div id="feedContainer" class="feed-container">
+            <!-- Blog posts will be injected here by JS -->
+        </div>
+    </div>
+
+    <!-- Link JS -->
+    <script src="script.js"></script>
+</body>
+</html>
+
